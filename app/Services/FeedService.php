@@ -39,7 +39,7 @@ class FeedService
      */
     public function all(): Collection
     {
-        $feeds = FeedModel::where('user_id', Auth::user()->id)->get();
+        $feeds = FeedModel::get();
 
         $parsed = new Collection;
 
