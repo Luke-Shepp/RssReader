@@ -28,6 +28,10 @@ class FeedController extends Controller
     {
         $feed = $this->service->single($feedId);
 
+        if (! $feed) {
+            abort(404);
+        }
+
         return view('feed.single', compact('feed'));
     }
 }
