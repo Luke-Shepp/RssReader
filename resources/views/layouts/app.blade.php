@@ -33,7 +33,11 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        @auth
+                            <a href="{{ route('feed.new') }}">
+                                <button class="btn btn-primary">New Feed</button>
+                            </a>
+                        @endauth
                     </ul>
 
                     <!-- Right Side Of Navbar -->

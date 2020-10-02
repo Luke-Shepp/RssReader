@@ -13,10 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
+
+Route::get('/feed/new', 'NewFeedController@index')->name('feed.new');
+Route::post('/feed/new', 'NewFeedController@save')->name('feed.new.save');
+
+Route::get('/feed/{id}', 'FeedController@feed')->name('feed.show');
