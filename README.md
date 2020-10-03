@@ -78,3 +78,11 @@ The application will now be available on http://127.0.0.1:8000
 - Composer
 - NPM
 - Make (optional step)
+
+### Console commands
+
+The application includes a console command to clear all cached feed files. This can be ran using the following:
+
+```
+php artisan feeds:clear
+```
