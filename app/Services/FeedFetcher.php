@@ -34,10 +34,17 @@ class FeedFetcher
      */
     public function fetch(FeedModel $feed): ?Feed
     {
+        $feedData = null;
+
         if (! $this->cacheExpired($feed)) {
             $feedData = $this->getCached($feed);
         } else {
-            $feedData = file_get_contents($feed->url);
+            try {
+                $feedData = file_get_contents($feed->url);
+            } catch (\Exception $ex) {
+                return null;
+            }
+
             $this->cache($feed, $feedData);
         }
 

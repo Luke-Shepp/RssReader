@@ -57,7 +57,10 @@ class FeedService
         $parsed = new Collection;
 
         foreach ($feeds as $feed) {
-            $parsed->add($this->fetcher->fetch($feed));
+            $fetchedFeed = $this->fetcher->fetch($feed);
+            if ($fetchedFeed) {
+                $parsed->add($fetchedFeed);
+            }
         }
 
         return $parsed;
