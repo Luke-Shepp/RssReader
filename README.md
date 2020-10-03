@@ -1,61 +1,80 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# RSS Reader
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+## Installation
 
-## About Laravel
+After cloning the repository to a local directory, the following process will build the application ready for development.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+The simplest method to setup the application is using the included Makefile, this requires Make as a dependency. If Make is unavailable, skip to the Manual Setup instructions below.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Makefile
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+For your convenience, a Makefile is included which will handle initial setup of the application:
 
-## Learning Laravel
+```
+make install
+```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Next, edit the newly created `.env` file and update where neccessary, such as database credentials if the included docker container is not being utilised. 
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Run migrations to set up the databsae. _Note: If you receive an error `MySQL has gone away`, please wait a few seconds for the MySQL database to finish booting and then run the migration command again._
+```
+php artisan migrate
+```
 
-## Laravel Sponsors
+Finally, serve the application:
+```
+php artisan serve
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+The application will now be available on http://127.0.0.1:8000
 
-### Premium Partners
+### Manual setup
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
+As an alternative to Make, the application can be manually setup using the steps listed below.
 
-## Contributing
+Install packages
+```
+composer install
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Start the required docker container(s) (If you are using either a local or cloud database, this can be skipped)
+```
+docker-compose up -d
+```
 
-## Code of Conduct
+Create an env file based off the included example
+```
+cp .env.example .env
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Generate an app key
+```
+php artisan key:generate
+```
 
-## Security Vulnerabilities
+Next, edit the newly created `.env` file and update where neccessary, such as database credentials if the included docker container is not being utilised. 
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+After updating the `.env` file, build the database using the included migrations. _Note: If you receive an error `MySQL has gone away`, please wait a few seconds for the MySQL database to finish booting and then run the migration command again._ 
+```
+php artisan migrate
+```
 
-## License
+Build the frontend assets
+```
+npm install && npm run dev
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Finally, serve the application
+```
+php artisan serve
+```
+
+The application will now be available on http://127.0.0.1:8000
+
+### Requirements 
+
+- Docker
+- PHP 7+
+- Composer
+- NPM
+- Make (optional step)
