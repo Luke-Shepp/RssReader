@@ -14,6 +14,14 @@
                         </div>
                     @endif
 
+                    @if(! $feeds->count())
+                        <p>Nothing to see here!</p>
+
+                        <a href="{{ route('feed.new') }}">
+                            <button class="btn btn-primary">Add a New Feed</button>
+                        </a>
+                    @endif
+
                     @foreach($feeds as $feed)
                         <div class="card mb-3">
                             <div class="card-horizontal">
