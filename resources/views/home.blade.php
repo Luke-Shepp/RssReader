@@ -33,6 +33,7 @@
                                 <div class="card-body">
                                     <h4 class="card-title"><a href="{{ route('feed.show', $feed->id) }}">{{ $feed->title }}</a></h4>
                                     <p class="card-text">{{ $feed->description }}</p>
+                                    <footer class="blockquote-footer"><a href="{{ $feed->link }}">{{ $feed->link }}</a></footer>
                                 </div>
                             </div>
                         </div>
