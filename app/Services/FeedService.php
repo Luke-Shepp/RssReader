@@ -31,7 +31,20 @@ class FeedService
             'url'     => $url
         ]);
 
-        return $feed->save();
+        if (! $feed->save()) {
+            return false;
+        }
+
+        // Attempt to fetch the feed, if null is returned the feed in inaccessible or
+        // of an unknown format.
+        $parsed = $this->single($feed->id);
+
+        if (! $parsed) {
+            FeedModel::find($feed->id)->delete();
+            return false;
+        }
+
+        return true;
     }
 
     /**

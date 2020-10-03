@@ -30,9 +30,9 @@ class FeedFetcher
 
     /**
      * @param FeedModel $feed
-     * @return Feed
+     * @return null|Feed
      */
-    public function fetch(FeedModel $feed): Feed
+    public function fetch(FeedModel $feed): ?Feed
     {
         if (! $this->cacheExpired($feed)) {
             $feedData = $this->getCached($feed);
@@ -42,6 +42,10 @@ class FeedFetcher
         }
 
         $parser = $this->parserFactory->make($feed, $feedData);
+
+        if (! $parser) {
+            return null;
+        }
 
         return $parser->parse($feed->id, $feedData);
     }

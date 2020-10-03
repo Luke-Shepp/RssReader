@@ -44,6 +44,6 @@ class NewFeedController extends Controller
             return redirect()->to(route('home'))->with('status', __('feed.created'));
         }
 
-        return redirect()->back()->with('status', __('feed.error'));
+        return redirect()->back()->withErrors(['feed_error' => __('feed.error')]);
     }
 }
