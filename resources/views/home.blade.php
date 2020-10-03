@@ -43,15 +43,4 @@
         </div>
     </div>
 </div>
-
-<style>
-    .card-horizontal {
-        display: flex;
-        flex: 1 1 auto;
-    }
-
-    .img-square-wrapper img {
-        max-height: 120px;
-    }
-</style>
 @endsection
