@@ -15,11 +15,14 @@
                                 </div>
                                 <div class="card-body">
                                     <p>{!! $item->description !!}</p>
-                                    <a href="{{ $item->link }}">
-                                        <button class="btn btn-secondary">
-                                            Read more
-                                        </button>
-                                    </a>
+
+                                    @if(!empty($item->link))
+                                        <a href="{{ $item->link }}">
+                                            <button class="btn btn-secondary">
+                                                Read more
+                                            </button>
+                                        </a>
+                                    @endif
                                     <footer class="blockquote-footer mt-3">{{ $item->published }}</footer>
                                 </div>
                             </div>
